@@ -1,0 +1,272 @@
+ /* Dark Professional Theme */
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #f7f7f7;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+/* Fixed Search Bar on the Right */
+.search-container {
+    position: fixed;
+    top: 30px; /* Top margin */
+    right: 20px; /* Align to the right */
+    background: #1e1e1e;
+    padding: 8px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 180px;
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    outline: none;
+    background: #000;
+    color: white;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #00ffcc;
+    transform: scale(1.05);
+}
+
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00ffcc;
+    transform: scale(1.1);
+}
+
+/* Prevent overlap */
+body {
+    padding-top: 70px;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    outline: none;
+    background: #1e1e1e;
+    color: white;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #00ffcc;
+    transform: scale(1.05);
+}
+
+button {
+    padding: 12px 18px;
+    font-size: 16px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-left: 10px;
+}
+
+button:hover {
+    background: #00ffcc;
+    transform: scale(1.1);
+}
+
+/* Country Card */
+.countryDiv {
+    display: inline-block;
+    width: 230px;
+    margin: 15px;
+    padding: 15px;
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideInUp 0.8s forwards;
+}
+
+.countryDiv:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgb(255, 255, 255);
+}
+
+/* Flag Flip Effect */
+.flag-container {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    perspective: 1000px;
+}
+
+.flag-img {
+    width: 100%;
+    height: 130px;
+    border-radius: 6px;
+    transition: transform 0.6s ease;
+    backface-visibility: hidden;
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+/* Country Details */
+.details {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+    color: #b3b3b3;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+}
+
+.details p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.learn-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(45deg, #000000, #ffffff);
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    border: 2px solid #ffffff;
+}
+
+.learn-more:hover {
+    background: linear-gradient(45deg, #ffffff, #000000);
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
+}
+
+.learn-more:active {
+    transform: scale(0.95);
+}
+
+.designer {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: -10px;
+    color: #b3b3b3;
+}
+
+.designer a {
+    color: #0a7bfc;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.designer a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+}
+
+.back-to-top {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: linear-gradient(45deg, #000000, #ffffff);
+color: black;
+font-weight: bold;
+padding: 12px 18px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+display: none;
+box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+}
+
+.back-to-top:hover {
+background: linear-gradient(45deg, #ffffff, #000000);
+color: white;
+transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 80%;
+    }
+}

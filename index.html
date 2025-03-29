@@ -1,0 +1,181 @@
+<!-- Global Explorer: Flags & Facts -->
+<!-- A modern, dark-themed web application showcasing country flags and facts with interactive features. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌎 Global Explorer: Flags & Facts</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>
+        <img src="/assets/images/Untitled design.png" alt="Logo" style="height: 3.5em; vertical-align: middle;">
+        Global Explorer: Flags & Facts
+    </h1>
+    <p class="designer">
+        Designed by 
+        <a href="https://profile-three-cyan.vercel.app/" target="_blank">Sageconcept</a>
+    </p>
+    
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for a country...">
+        <button onclick="searchCountry()">Search</button>
+    </div>
+
+    <div id="countryList">Loading...</div>
+
+        <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">⬆ Back to Top</button>
+
+    <script>
+        let countriesData = [];
+
+        fetch("https://restcountries.com/v3.1/all")
+        .then(response => response.json())
+        .then(data => {
+            countriesData = data;
+            displayCountries(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            document.getElementById("countryList").innerHTML = "Failed to load data.";
+        });
+
+        function displayCountries(data) {
+            let countryList = document.getElementById("countryList");
+            countryList.innerHTML = ""; // Clear content
+
+            data.forEach((country, index) => {
+                setTimeout(() => {
+                    const countryDiv = document.createElement("div");
+                    countryDiv.className = "countryDiv";
+
+                    let population = country.population ? country.population.toLocaleString() : "N/A";
+let timeZone = country.timezones ? country.timezones[0] : "N/A";
+let gdp = country.gini ? `$${country.gini[Object.keys(country.gini)[0]]}B` : "N/A";
+let landmark = country.capital ? `Famous: ${country.capital[0]}` : "Landmark: N/A";
+
+ // Back to Top Button
+ const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+});
+
+backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+countryDiv.innerHTML = `
+    <p><strong>${country.name.common}</strong></p>
+    <div class="flag-container">
+        <img class="flag-img" src="${country.flags.svg}" 
+             alt="Flag of ${country.name.common}"
+             data-flag="${country.flags.svg}"
+             data-coat="${country.coatOfArms.svg || country.flags.svg}">
+    </div>
+    <div class="details">
+        <p>📊 GDP: ${gdp}</p>
+        <p>👥 Population: ${population}</p>
+        <p>⏰ Time Zone: ${timeZone}</p>
+        <p>📍 ${landmark}</p>
+    </div>
+
+     <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(country.name.official)}" 
+       target="_blank" class="learn-more">
+       Learn More
+    </a>
+    
+`;
+
+// Function to update live time
+function updateLiveTime() {
+    const timeElements = document.querySelectorAll(".live-time");
+    timeElements.forEach(el => {
+        const tz = el.dataset.timezone;
+        if (tz && tz !== "N/A") {
+            const time = new Date().toLocaleString("en-US", { timeZone: tz, timeStyle: "short", hourCycle: "h12" });
+            el.querySelector("span").textContent = time;
+        } else {
+            el.querySelector("span").textContent = "Unavailable";
+        }
+    });
+}
+
+// Update live time every second
+setInterval(updateLiveTime, 1000);
+updateLiveTime(); // Initial call
+
+
+                 countryDiv.addEventListener("click", function() {
+    const img = countryDiv.querySelector(".flag-img");
+
+    // Flip animation effect
+    img.style.transition = "transform 0.3s ease";
+    img.style.transform = "rotateY(180deg)";
+
+    setTimeout(() => {
+        // Toggle between flag and coat of arms
+        if (img.src === img.dataset.flag) {
+            img.src = img.dataset.coat;
+        } else {
+            img.src = img.dataset.flag;
+        }
+
+        // Reset rotation for smooth transition
+        img.style.transform = "rotateY(0deg)";
+    }, 150);
+});
+
+// Append with staggered animation
+setTimeout(() => {
+    countryList.appendChild(countryDiv);
+    countryDiv.style.opacity = "0";
+    countryDiv.style.transform = "translateY(10px)";
+    setTimeout(() => {
+        countryDiv.style.opacity = "1";
+        countryDiv.style.transform = "translateY(0)";
+        countryDiv.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    }, 50);
+}, index * 40);  // Faster stagger effect
+    
+                });
+            });
+        }
+
+        function searchCountry() {
+            const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+            const filteredCountries = countriesData.filter(country =>
+                country.name.common.toLowerCase().includes(searchQuery)
+            );
+
+            if (filteredCountries.length > 0) {
+                displayCountries(filteredCountries);
+            } else {
+                document.getElementById("countryList").innerHTML = "<p>No country found!</p>";
+            }
+        }
+        
+        function updateTimes() {
+            setInterval(() => {
+                document.querySelectorAll(".live-time").forEach(timeElement => {
+                    const timeZone = timeElement.dataset.timezone;
+                    if (timeZone) {
+                        const options = { timeZone, hour: "2-digit", minute: "2-digit", second: "2-digit" };
+                        timeElement.textContent = new Intl.DateTimeFormat("en-US", options).format(new Date());
+                    }
+                });
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -107,25 +107,53 @@ button:hover {
 /* Country Card */
 .countryDiv {
     display: inline-block;
-    width: 230px;
-    margin: 15px;
-    padding: 15px;
-    background: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    width: 260px;
+    margin: 20px;
+    padding: 20px;
+    background: linear-gradient(145deg, #0f172a, #1e293b); /* Deep Navy to Slate */
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     transform: translateY(50px);
     opacity: 0;
     animation: slideInUp 0.8s forwards;
+    color: #e2e8f0; /* Soft Gray Text */
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Hover Effect */
 .countryDiv:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgb(255, 255, 255);
+    transform: translateY(-8px) scale(1.05);
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    color: #ffffff;
 }
+
+/* Animated Border Glow */
+.countryDiv::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+}
+
+.countryDiv:hover::after {
+    opacity: 1;
+}
+
 
 /* Flag Flip Effect */
 .flag-container {
